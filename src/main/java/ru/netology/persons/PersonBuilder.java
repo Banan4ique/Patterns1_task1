@@ -1,4 +1,4 @@
-package ru.netology;
+package ru.netology.persons;
 
 public class PersonBuilder {
 
@@ -16,7 +16,13 @@ public class PersonBuilder {
         return this;
     }
     public PersonBuilder setAge(Integer age) {
-        this.age = age;
+        if(age != null) {
+            if (age >= 0) {
+                this.age = age;
+            } else {
+                throw new IllegalArgumentException("Возраст указан неверно: " + age);
+            }
+        }
         return this;
     }
     public PersonBuilder setAddress(String address) {
@@ -27,7 +33,7 @@ public class PersonBuilder {
     public Person build() {
         Person person = new Person(name, surname, age);
         if (name == null || surname == null) {
-            throw new IllegalStateException("Обязательные поля name и surname не заполнены");
+            throw new IllegalStateException("Обязательные поля не заполнены");
         }
         person.setAddress(address);
         return person;

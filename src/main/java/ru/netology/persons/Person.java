@@ -1,4 +1,4 @@
-package ru.netology;
+package ru.netology.persons;
 
 import java.util.OptionalInt;
 
@@ -29,7 +29,10 @@ public class Person {
     }
 
     public PersonBuilder newChildBuilder() {
-        return new PersonBuilder().setSurname(surname);
+        return new PersonBuilder()
+                .setSurname(surname)
+                .setAge(0)
+                .setAddress(address);
     }
 
     public boolean hasAge() {
@@ -49,7 +52,7 @@ public class Person {
     }
 
     public OptionalInt getAge() {
-        return OptionalInt.of(age);
+        return hasAge()?OptionalInt.of(age):OptionalInt.empty();
     }
 
     public String getAddress() {
@@ -71,7 +74,7 @@ public class Person {
         return "Person{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", age=" + age +
+                ", age=" + getAge().toString().substring(12).replace("]", "") +
                 ", address='" + address + '\'' +
                 '}';
     }
